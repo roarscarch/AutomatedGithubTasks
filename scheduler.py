@@ -26,8 +26,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 
-from ideator import generate_idea
-from repoman import create_repo, bootstrap_scaffold
+from ideator import generate_idea, is_project_complete
+from repoman import create_repo, bootstrap_scaffold, clone_repo
 from committer import run as commit_run, load_config
 from logger import setup_logger, log_daily_run
 
@@ -75,9 +75,40 @@ def daily_job():
         or weeks_since(state["week_start_date"]) >= 1
     )
 
+    if need_new_project and state["current_project"] is not None:
+        # Before abandoning the current project, ask DeepSeek if it's done
+        log.info("Checking if current project is complete...")
+        work_dir = ROOT / load_config().get("work_dir", "./repos")
+        curr_repo = work_dir / state["current_project"]["name"]
+        if not curr_repo.exists():
+            curr_repo = clone_repo(state["current_project"]["name"], work_dir)
+        import subprocess
+        subprocess.run(["git", "-C", str(curr_repo), "pull", "origin", "main"],
+                       capture_output=True)
+
+        review = is_project_complete(state["current_project"], curr_repo)
+        log.info(f"Review: score={review['score']}/10, complete={review['complete']}")
+        log.info(f"Verdict: {review['verdict']}")
+
+        if not review["complete"]:
+            log.info(f"Project not done — continuing for another week. Next focus: {review['next_focus']}")
+            state["week_start_date"] = today
+            state["day_in_week"] = 0
+            state["total_commits_this_week"] = 0
+            save_state(state)
+            from committer import run as commit_run
+            # Fall through to the commit phase below with the current project
+            # We'll set up for the else branch
+            need_new_project = False
+            # Re-set these so the else branch picks them up
+            idea = state["current_project"]
+            repo_path = curr_repo
+
     if need_new_project:
+        if state["current_project"] is not None:
+            log.info(f"Project {state['current_project']['name']} marked complete — graduating!")
         log.info("=" * 60)
-        log.info("NEW PROJECT WEEK — generating idea via DeepSeek...")
+        log.info("NEW PROJECT — generating idea via DeepSeek...")
 
         idea = generate_idea()
         log.info(f"Idea: {idea['name']} — {idea['tagline']}")
