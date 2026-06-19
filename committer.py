@@ -260,9 +260,15 @@ def apply_commit(repo_path, commit_data):
         ["git", "-C", str(repo_path), "add", commit_data["file"]],
         check=True,
     )
+    msg = commit_data["message"]
+    # Strip type prefix if DeepSeek already included it
+    for prefix in ("feat:", "fix:", "refactor:", "docs:", "test:", "chore:"):
+        if msg.startswith(prefix):
+            msg = msg[len(prefix):].strip()
+            break
     subprocess.run(
         ["git", "-C", str(repo_path), "commit", "-m",
-         f"{commit_data['type']}: {commit_data['message']}"],
+         f"{commit_data['type']}: {msg}"],
         check=True,
     )
 

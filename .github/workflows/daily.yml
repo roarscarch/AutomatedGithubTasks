@@ -29,8 +29,8 @@ jobs:
         run: |
           git config --global user.name "roarscarch"
           git config --global user.email "2020ugee082@nitjsr.ac.in"
-          # Allow gh CLI to use the token for all auth
-          echo "${{ secrets.GH_TOKEN }}" | gh auth login --with-token
+          # Make gh the git credential helper — authenticates all git operations
+          gh auth setup-git
 
       - name: Run daily automation
         env:
