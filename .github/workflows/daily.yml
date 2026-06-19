@@ -31,10 +31,8 @@ jobs:
         run: |
           git config --global user.name "roarscarch"
           git config --global user.email "2020ugee082@nitjsr.ac.in"
-          # Override HTTPS URLs to inject the token for all GitHub operations
+          # Inject token into all HTTPS github.com URLs
           git config --global url."https://oauth2:${GH_TOKEN}@github.com/".insteadOf "https://github.com/"
-          # Also auth gh CLI for repo creation
-          echo "${GH_TOKEN}" | gh auth login --with-token
 
       - name: Run daily automation
         env:
