@@ -1,0 +1,37 @@
+{
+  "current_project": {
+    "name": "git-pulse",
+    "description": "A CLI tool that visualizes your Git repository's emotional arc by analyzing commit message sentiment and generating a pulse chart over time.",
+    "tagline": "See your repo's emotional heartbeat",
+    "language": "python",
+    "stack": [
+      "textblob",
+      "matplotlib"
+    ],
+    "features": [
+      "Scans git log and extracts commit messages with timestamps",
+      "Runs sentiment analysis on each commit message using TextBlob",
+      "Bins sentiment scores by hour/day to create a time-series",
+      "Renders a live-updating pulse chart showing emotional highs and lows",
+      "Highlights major events (e.g., v1.0 release, big refactors) as annotated spikes"
+    ],
+    "architecture_note": "Uses a sliding window queue to accumulate sentiment deltas, then applies a Savitzky\u2013Golay filter for smooth pulse visualization; git commands are parsed via subprocess to avoid heavy dependencies."
+  },
+  "week_start_date": "2026-06-20",
+  "day_in_week": 0,
+  "total_commits_this_week": 11,
+  "history": [
+    {
+      "date": "2026-06-20",
+      "project": "git-pulse",
+      "commits": 6,
+      "day_in_week": 0
+    },
+    {
+      "date": "2026-06-20",
+      "project": "git-pulse",
+      "commits": 5,
+      "day_in_week": 0
+    }
+  ]
+}

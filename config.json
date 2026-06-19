@@ -1,0 +1,13 @@
+{
+  "deepseek_api_key": "",
+  "deepseek_base_url": "https://api.deepseek.com",
+  "deepseek_model": "deepseek-chat",
+  "commits_min": 5,
+  "commits_max": 10,
+  "schedule_hour": 9,
+  "schedule_minute": 13,
+  "work_dir": "./repos",
+  "max_retries": 3,
+  "retry_delay_seconds": 30,
+  "github_username": "roarscarch"
+}
