@@ -66,8 +66,12 @@ def weeks_since(d):
 
 def daily_job():
     """Core logic — decide whether to start a new project or continue."""
+    import subprocess  # used throughout
+
     state = load_state()
     today = str(date.today())
+    config = load_config()
+    work_dir = ROOT / config.get("work_dir", "./repos")
 
     need_new_project = (
         state["current_project"] is None
@@ -78,11 +82,9 @@ def daily_job():
     if need_new_project and state["current_project"] is not None:
         # Before abandoning the current project, ask DeepSeek if it's done
         log.info("Checking if current project is complete...")
-        work_dir = ROOT / load_config().get("work_dir", "./repos")
         curr_repo = work_dir / state["current_project"]["name"]
         if not curr_repo.exists():
             curr_repo = clone_repo(state["current_project"]["name"], work_dir)
-        import subprocess
         subprocess.run(["git", "-C", str(curr_repo), "pull", "origin", "main"],
                        capture_output=True)
 
@@ -91,22 +93,18 @@ def daily_job():
         log.info(f"Verdict: {review['verdict']}")
 
         if not review["complete"]:
-            log.info(f"Project not done — continuing for another week. Next focus: {review['next_focus']}")
+            log.info(f"Project not done — continuing another week. Focus: {review['next_focus']}")
             state["week_start_date"] = today
             state["day_in_week"] = 0
             state["total_commits_this_week"] = 0
             save_state(state)
-            from committer import run as commit_run
-            # Fall through to the commit phase below with the current project
-            # We'll set up for the else branch
             need_new_project = False
-            # Re-set these so the else branch picks them up
             idea = state["current_project"]
             repo_path = curr_repo
 
     if need_new_project:
         if state["current_project"] is not None:
-            log.info(f"Project {state['current_project']['name']} marked complete — graduating!")
+            log.info(f"Project {state['current_project']['name']} complete — graduating!")
         log.info("=" * 60)
         log.info("NEW PROJECT — generating idea via DeepSeek...")
 
@@ -116,7 +114,6 @@ def daily_job():
 
         log.info("Creating GitHub repo...")
         repo_path = create_repo(idea)
-        config = load_config()
         username = config.get("github_username", "user")
         repo_url = f"https://github.com/{username}/{idea['name']}"
         log.info(f"Repo: {repo_url}")
@@ -130,19 +127,14 @@ def daily_job():
         state["total_commits_this_week"] = 0
     else:
         idea = state["current_project"]
-        config = load_config()
-        work_dir = ROOT / config.get("work_dir", "./repos")
         repo_path = work_dir / idea["name"]
-        # In GitHub Actions the filesystem is fresh each run — clone if missing
         if not repo_path.exists():
             log.info(f"Cloning existing project repo: {idea['name']}...")
-            from repoman import clone_repo
             repo_path = clone_repo(idea["name"], work_dir)
 
     # Pull latest
-    import subprocess
     subprocess.run(["git", "-C", str(repo_path), "pull", "origin", "main"],
-                       capture_output=True)
+                   capture_output=True)
 
     # ---- make today's commits ----
     commits_made = commit_run(repo_path, idea)
@@ -161,9 +153,7 @@ def daily_job():
     state["history"] = state["history"][-365:]
     save_state(state)
 
-    config = load_config()
-    username = config.get("github_username", "user")
-    repo_url = f"https://github.com/{username}/{idea['name']}"
+    repo_url = f"https://github.com/{config.get('github_username', 'user')}/{idea['name']}"
     log_daily_run(idea["name"], commits_made, repo_url)
 
     log.info(f"Week day {state['day_in_week']}/6 — {state['total_commits_this_week']} commits so far this week.")
