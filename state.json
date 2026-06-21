@@ -18,8 +18,8 @@
     "architecture_note": "Uses a sliding window queue to accumulate sentiment deltas, then applies a Savitzky\u2013Golay filter for smooth pulse visualization; git commands are parsed via subprocess to avoid heavy dependencies."
   },
   "week_start_date": "2026-06-20",
-  "day_in_week": 0,
-  "total_commits_this_week": 27,
+  "day_in_week": 1,
+  "total_commits_this_week": 36,
   "history": [
     {
       "date": "2026-06-20",
@@ -44,6 +44,12 @@
       "project": "git-pulse",
       "commits": 8,
       "day_in_week": 0
+    },
+    {
+      "date": "2026-06-21",
+      "project": "git-pulse",
+      "commits": 9,
+      "day_in_week": 1
     }
   ]
 }
