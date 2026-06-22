@@ -1,25 +1,25 @@
 {
   "current_project": {
-    "name": "git-pulse",
-    "description": "A CLI tool that visualizes your Git repository's emotional arc by analyzing commit message sentiment and generating a pulse chart over time.",
-    "tagline": "See your repo's emotional heartbeat",
+    "name": "git-blame-chess",
+    "description": "A CLI tool that turns your Git repository into a chess game where each commit is a move, and you can play through the development history or let two branches battle.",
+    "tagline": "Play chess with your git history",
     "language": "python",
     "stack": [
-      "textblob",
-      "matplotlib"
+      "gitpython",
+      "chess"
     ],
     "features": [
-      "Scans git log and extracts commit messages with timestamps",
-      "Runs sentiment analysis on each commit message using TextBlob",
-      "Bins sentiment scores by hour/day to create a time-series",
-      "Renders a live-updating pulse chart showing emotional highs and lows",
-      "Highlights major events (e.g., v1.0 release, big refactors) as annotated spikes"
+      "Parse any Git repo into a chess game graph (commits as board states, diffs as moves)",
+      "Blame-aware move generation: files changed = pieces moved, lines changed = captures",
+      "Play through history interactively in the terminal with colored board output",
+      "Branch duel mode: two branches play against each other, merging at conflict points",
+      "Export the game as a PGN file for analysis in any chess GUI"
     ],
-    "architecture_note": "Uses a sliding window queue to accumulate sentiment deltas, then applies a Savitzky\u2013Golay filter for smooth pulse visualization; git commands are parsed via subprocess to avoid heavy dependencies."
+    "architecture_note": "The key insight is mapping each file in the repo to a chess piece type based on its extension, and each line diff to a piece move, using a deterministic hash of the file path and line number as the board coordinate."
   },
-  "week_start_date": "2026-06-20",
-  "day_in_week": 1,
-  "total_commits_this_week": 36,
+  "week_start_date": "2026-06-22",
+  "day_in_week": 0,
+  "total_commits_this_week": 7,
   "history": [
     {
       "date": "2026-06-20",
@@ -50,6 +50,12 @@
       "project": "git-pulse",
       "commits": 9,
       "day_in_week": 1
+    },
+    {
+      "date": "2026-06-22",
+      "project": "git-blame-chess",
+      "commits": 7,
+      "day_in_week": 0
     }
   ]
 }
