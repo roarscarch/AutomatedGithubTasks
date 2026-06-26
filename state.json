@@ -18,8 +18,8 @@
     "architecture_note": "The key insight is mapping each file in the repo to a chess piece type based on its extension, and each line diff to a piece move, using a deterministic hash of the file path and line number as the board coordinate."
   },
   "week_start_date": "2026-06-22",
-  "day_in_week": 3,
-  "total_commits_this_week": 37,
+  "day_in_week": 4,
+  "total_commits_this_week": 44,
   "history": [
     {
       "date": "2026-06-20",
@@ -74,6 +74,12 @@
       "project": "git-blame-chess",
       "commits": 10,
       "day_in_week": 3
+    },
+    {
+      "date": "2026-06-26",
+      "project": "git-blame-chess",
+      "commits": 7,
+      "day_in_week": 4
     }
   ]
 }
