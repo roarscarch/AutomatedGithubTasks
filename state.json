@@ -1,25 +1,25 @@
 {
   "current_project": {
-    "name": "git-blame-chess",
-    "description": "A CLI tool that turns your Git repository into a chess game where each commit is a move, and you can play through the development history or let two branches battle.",
-    "tagline": "Play chess with your git history",
-    "language": "python",
+    "name": "git-history-mapper",
+    "description": "Visualize any Git repo as an interactive, force-directed graph of commits, branches, and co-authors to reveal hidden collaboration patterns and project evolution.",
+    "tagline": "See your repo's hidden social graph",
+    "language": "typescript",
     "stack": [
-      "gitpython",
-      "chess"
+      "d3-force",
+      "ink"
     ],
     "features": [
-      "Parse any Git repo into a chess game graph (commits as board states, diffs as moves)",
-      "Blame-aware move generation: files changed = pieces moved, lines changed = captures",
-      "Play through history interactively in the terminal with colored board output",
-      "Branch duel mode: two branches play against each other, merging at conflict points",
-      "Export the game as a PGN file for analysis in any chess GUI"
+      "Parse git log into a node-edge graph (commits, authors, branches)",
+      "Real-time force-directed layout with zoom and hover tooltips",
+      "Color-code nodes by author or branch with adjustable time slider",
+      "Export the visualization as a standalone HTML file",
+      "CLI with optional --depth and --since flags to limit scope"
     ],
-    "architecture_note": "The key insight is mapping each file in the repo to a chess piece type based on its extension, and each line diff to a piece move, using a deterministic hash of the file path and line number as the board coordinate."
+    "architecture_note": "Uses a custom incremental graph builder that streams git log output via child_process, building adjacency in a Map<sha, Node> while D3's force simulation runs in an Ink terminal canvas re-rendered on each tick."
   },
-  "week_start_date": "2026-06-22",
-  "day_in_week": 6,
-  "total_commits_this_week": 62,
+  "week_start_date": "2026-06-29",
+  "day_in_week": 0,
+  "total_commits_this_week": 6,
   "history": [
     {
       "date": "2026-06-20",
@@ -92,6 +92,12 @@
       "project": "git-blame-chess",
       "commits": 10,
       "day_in_week": 6
+    },
+    {
+      "date": "2026-06-29",
+      "project": "git-history-mapper",
+      "commits": 6,
+      "day_in_week": 0
     }
   ]
 }
