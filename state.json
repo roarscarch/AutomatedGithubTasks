@@ -18,8 +18,8 @@
     "architecture_note": "Uses a custom incremental graph builder that streams git log output via child_process, building adjacency in a Map<sha, Node> while D3's force simulation runs in an Ink terminal canvas re-rendered on each tick."
   },
   "week_start_date": "2026-06-29",
-  "day_in_week": 0,
-  "total_commits_this_week": 6,
+  "day_in_week": 1,
+  "total_commits_this_week": 11,
   "history": [
     {
       "date": "2026-06-20",
@@ -98,6 +98,12 @@
       "project": "git-history-mapper",
       "commits": 6,
       "day_in_week": 0
+    },
+    {
+      "date": "2026-06-30",
+      "project": "git-history-mapper",
+      "commits": 5,
+      "day_in_week": 1
     }
   ]
 }
