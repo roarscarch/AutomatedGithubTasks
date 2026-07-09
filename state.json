@@ -19,8 +19,8 @@
     "architecture_note": "Uses a custom topological sort augmented with a 'narrative weight' heuristic \u2014 commit messages with imperative verbs and JIRA-style issue IDs are treated as plot points, while fast-forward merges are suppressed as scene transitions."
   },
   "week_start_date": "2026-07-06",
-  "day_in_week": 2,
-  "total_commits_this_week": 20,
+  "day_in_week": 3,
+  "total_commits_this_week": 27,
   "history": [
     {
       "date": "2026-06-20",
@@ -153,6 +153,12 @@
       "project": "git-graph-narrator",
       "commits": 5,
       "day_in_week": 2
+    },
+    {
+      "date": "2026-07-09",
+      "project": "git-graph-narrator",
+      "commits": 7,
+      "day_in_week": 3
     }
   ]
 }
