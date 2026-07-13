@@ -1,26 +1,25 @@
 {
   "current_project": {
-    "name": "git-graph-narrator",
-    "description": "Generates a concise, human-readable story of your Git repository's evolution by analyzing commit messages, branching patterns, and merge strategies.",
-    "tagline": "Your repo's history as a story",
-    "language": "typescript",
+    "name": "git-forest",
+    "description": "A CLI tool that renders your git commit graph as an interactive ASCII-art forest where branches become trees and merges become root systems, revealing the hidden organic structure of your repository.",
+    "tagline": "See your git history grow",
+    "language": "rust",
     "stack": [
-      "node:child_process",
-      "commander",
-      "ink"
+      "git2",
+      "termion"
     ],
     "features": [
-      "Parses git log with custom formatting to extract commit DAG",
-      "Ranks commits by impact via PageRank-like algorithm on merge edges",
-      "Generates a multi-paragraph narrative with protagonist branches and conflict arcs",
-      "Summarizes merge storms, long-lived branches, and refactor hotspots",
-      "Outputs as plain text, markdown, or animated terminal slides"
+      "Render the full commit graph as a scrolling ASCII forest with trunks for long-lived branches",
+      "Color trees by author, with leaf density proportional to commit frequency on each branch",
+      "Interactive mode: scroll/zoom with arrow keys and inspect commits by clicking on leaves",
+      "Detect and highlight merge storms (many simultaneous merges) as tangled root systems",
+      "Export the forest as a static SVG for sharing on social media or docs"
     ],
-    "architecture_note": "Uses a custom topological sort augmented with a 'narrative weight' heuristic \u2014 commit messages with imperative verbs and JIRA-style issue IDs are treated as plot points, while fast-forward merges are suppressed as scene transitions."
+    "architecture_note": "Uses a custom topological layout algorithm that maps the DAG to a 2D grid with gravitational pull between related commits, then applies a recursive tree-skeletonizer to convert linear segments into organic tree shapes with realistic branch taper."
   },
-  "week_start_date": "2026-07-06",
-  "day_in_week": 6,
-  "total_commits_this_week": 50,
+  "week_start_date": "2026-07-13",
+  "day_in_week": 0,
+  "total_commits_this_week": 6,
   "history": [
     {
       "date": "2026-06-20",
@@ -177,6 +176,12 @@
       "project": "git-graph-narrator",
       "commits": 9,
       "day_in_week": 6
+    },
+    {
+      "date": "2026-07-13",
+      "project": "git-forest",
+      "commits": 6,
+      "day_in_week": 0
     }
   ]
 }
