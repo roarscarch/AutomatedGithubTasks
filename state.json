@@ -1,25 +1,25 @@
 {
   "current_project": {
-    "name": "git-forest",
-    "description": "A CLI tool that renders your git commit graph as an interactive ASCII-art forest where branches become trees and merges become root systems, revealing the hidden organic structure of your repository.",
-    "tagline": "See your git history grow",
-    "language": "rust",
+    "name": "git-graph-mtime",
+    "description": "Visualize the real-world time your Git branches spent diverged as an interactive force-directed graph, revealing hidden merge delays and parallel work bottlenecks.",
+    "tagline": "See time lost in branches.",
+    "language": "typescript",
     "stack": [
-      "git2",
-      "termion"
+      "cytoscape.js",
+      "nodegit"
     ],
     "features": [
-      "Render the full commit graph as a scrolling ASCII forest with trunks for long-lived branches",
-      "Color trees by author, with leaf density proportional to commit frequency on each branch",
-      "Interactive mode: scroll/zoom with arrow keys and inspect commits by clicking on leaves",
-      "Detect and highlight merge storms (many simultaneous merges) as tangled root systems",
-      "Export the forest as a static SVG for sharing on social media or docs"
+      "Parses commit timestamps from local Git history via nodegit",
+      "Computes elapsed wall-clock time between branch creation and merge",
+      "Renders an interactive force-directed graph with edge thickness proportional to divergence time",
+      "Highlights branches with the longest absolute drift",
+      "Exports graph as SVG or PNG for reports"
     ],
-    "architecture_note": "Uses a custom topological layout algorithm that maps the DAG to a 2D grid with gravitational pull between related commits, then applies a recursive tree-skeletonizer to convert linear segments into organic tree shapes with realistic branch taper."
+    "architecture_note": "Uses a two-pass algorithm: first builds a commit DAG with timestamps, then runs a custom cost function that maps merge intervals to edge weights for Cytoscape.js layout using an inverted spring model."
   },
-  "week_start_date": "2026-07-13",
-  "day_in_week": 6,
-  "total_commits_this_week": 58,
+  "week_start_date": "2026-07-20",
+  "day_in_week": 0,
+  "total_commits_this_week": 9,
   "history": [
     {
       "date": "2026-06-20",
@@ -218,6 +218,12 @@
       "project": "git-forest",
       "commits": 10,
       "day_in_week": 6
+    },
+    {
+      "date": "2026-07-20",
+      "project": "git-graph-mtime",
+      "commits": 9,
+      "day_in_week": 0
     }
   ]
 }
