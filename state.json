@@ -18,8 +18,8 @@
     "architecture_note": "Uses a two-pass algorithm: first builds a commit DAG with timestamps, then runs a custom cost function that maps merge intervals to edge weights for Cytoscape.js layout using an inverted spring model."
   },
   "week_start_date": "2026-07-20",
-  "day_in_week": 1,
-  "total_commits_this_week": 16,
+  "day_in_week": 2,
+  "total_commits_this_week": 22,
   "history": [
     {
       "date": "2026-06-20",
@@ -230,6 +230,12 @@
       "project": "git-graph-mtime",
       "commits": 7,
       "day_in_week": 1
+    },
+    {
+      "date": "2026-07-22",
+      "project": "git-graph-mtime",
+      "commits": 6,
+      "day_in_week": 2
     }
   ]
 }
